@@ -136,7 +136,7 @@ static int epics_conntrack_search_reply_help(struct sk_buff *skb,
    while (offset + 16 <= skb->len) {
       skb_copy_bits(skb, offset, &hdr, sizeof(hdr));
 /*    pr_info("size: %d, command: %d, size: %d, datatype: %d", skb->len, be16_to_cpu(hdr.command), be16_to_cpu(hdr.payloadSize), be16_to_cpu(hdr.dataType));*/
-      if ((be16_to_cpu(hdr.command) == 0x06) && (hdr.parameter1 == 0xFFFFFFFF)) {
+      if (be16_to_cpu(hdr.command) == 0x06) {
          port = be16_to_cpu(hdr.dataType);
          if (port < 1024U) {
             pr_warning("Not allowing port %d < 1024 in.", port);
